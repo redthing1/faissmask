@@ -32,6 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="runtimes\**" PackagePath="runtimes" Visible="false" />
+      <!-- pack native binaries, and copy to output dir -->
+      <Content Include="runtimes\**" PackagePath="runtimes" CopyToOutputDirectory="PreserveNewest" Visible="false"/>
     </ItemGroup>
 </Project>
