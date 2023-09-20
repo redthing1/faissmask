@@ -10,6 +10,10 @@ namespace FaissMask
             return new IndexFlat(handle);
         }
         
+        public void Write(string filename) {
+            Handle.Write(filename);
+        }
+        
         internal IndexFlat(IndexFlatSafeHandle handle) : base(handle) { }
         public IndexFlat() : this(0, MetricType.MetricL2)
         {

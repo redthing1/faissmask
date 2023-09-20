@@ -41,6 +41,37 @@ namespace FaissMask.Internal
 
             return index;
         }
+        
+        public void Write(string filename) {
+            if (string.IsNullOrEmpty(filename))
+            {
+                throw new ArgumentNullException(nameof(filename));
+            }
+            
+            filename = Path.GetFullPath(filename);
+            var parentPath = Path.GetDirectoryName(filename);
+            if (!Directory.Exists(parentPath))
+            {
+                throw new DirectoryNotFoundException($"The directory {parentPath} does not exist");
+            }
+            
+            var returnCode = NativeMethods.faiss_write_index_fname(this, filename);
+            if (returnCode != 0)
+            {
+                var lastError = NativeMethods.faiss_get_last_error();
+
+                if (string.IsNullOrEmpty(lastError))
+                {
+                    throw new IOException(
+                        $"An unknown error occurred trying to write the index '{filename}' (return code {returnCode})");
+                }
+                else
+                {
+                    throw new IOException(
+                        $"An error occurred trying to write the index '{filename}': {lastError} (return code {returnCode})");
+                }
+            }
+        }
 
         public bool IsFree { get; internal set; } = false;
 

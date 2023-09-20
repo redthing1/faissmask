@@ -40,6 +40,8 @@ namespace FaissMask.Internal
         [DllImport("faiss_c", SetLastError = true)]
         public static extern int faiss_read_index_fname(string fname, int io_flags, ref IntPtr p_out);
         [DllImport("faiss_c", SetLastError = true)]
+        public static extern int faiss_write_index_fname(IndexSafeHandle index, string fname);
+        [DllImport("faiss_c", SetLastError = true)]
         public static extern string faiss_get_last_error();
         [DllImport("faiss_c", SetLastError = true)]
         public static extern int faiss_IndexIVF_make_direct_map(IndexSafeHandle index, int new_maintain_direct_map);
